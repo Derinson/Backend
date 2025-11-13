@@ -11,7 +11,10 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => app.listen(process.env.PORT, () => {
-    console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
-  }))
+  .then(() => {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en puerto ${PORT}`);
+    });
+  })
   .catch(err => console.error('Error de conexión:', err));
